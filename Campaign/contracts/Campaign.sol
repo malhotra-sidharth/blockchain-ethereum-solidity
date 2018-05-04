@@ -1,5 +1,21 @@
 pragma solidity ^0.4.17;
 
+contract CampaignFactory {
+    address[] public deployedCampaigns;
+
+    function createCampaign(uint minimumContribution) public {
+
+        // deploy a new Campaign contract
+        // msg.sender for Campaign will be this
+        // factory contract, therefore we need to
+        // pass the sender address to Campaign contract
+        address newCampaign = new Campaign(minimumContribution, msg.sender);
+
+        // add to deployedCampaigns list
+        deployedCampaigns.push(newCampaign);
+    }
+}
+
 contract Campaign {
 
     struct Request {
