@@ -37,8 +37,8 @@ contract Campaign {
     mapping(address => bool) public approvers;
     uint public approversCount;
 
-    constructor(uint minimum) public {
-        manager = msg.sender;
+    constructor(uint minimum, address creator) public {
+        manager = creator;
         minimumContribution = minimum;
     }
 
