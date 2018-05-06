@@ -65,10 +65,6 @@ contract Campaign {
     // only to be called by the manager
     function createRequest(string description, uint value, address recipient)
     public restricted {
-
-        // check if sender has contributed or not
-        require(approvers[msg.sender]);
-
         // canot use storage keyword
         // We just need to initialize value properties
         // mapping is a reference property
@@ -90,7 +86,7 @@ contract Campaign {
         // create a storage local variable
         Request storage request = requests[index];
 
-        // person has contributed
+        // check if person has contributed
         require(approvers[msg.sender]);
 
         // check if the sender has not approved before
