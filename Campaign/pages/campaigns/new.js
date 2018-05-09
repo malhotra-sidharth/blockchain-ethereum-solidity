@@ -7,11 +7,14 @@ import web3 from '../../ethereum/web3';
 class CampaignNew extends Component{
     state = {
         minimumContribution: '',
-        errorMsg: ''
+        errorMsg: '',
+        loading: false
     };
 
     onSubmit = async (event) => {
         event.preventDefault();
+
+        this.setState({loading: true, errorMsg: ''});
 
         // use metamask to calculate the gas amount
         // metamask will automatically calculate the gas amount
@@ -26,6 +29,8 @@ class CampaignNew extends Component{
         catch (e) {
             this.setState({errorMsg: e.message});
         }
+
+        this.setState({loading: false});
     };
 
     render() {
@@ -44,7 +49,7 @@ class CampaignNew extends Component{
                                 this.setState({minimumContribution: event.target.value})}
                         />
                     </Form.Field>
-                    <Button primary>Create!</Button>
+                    <Button loading={this.state.loading} primary>Create!</Button>
 
                     <Message
                         error
